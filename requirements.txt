@@ -1,0 +1,5 @@
+gTTS==2.2.3
+requests==2.26.0
+pyttsx3==2.90
+nltk==3.6.2
+PyQt5==5.15.6
