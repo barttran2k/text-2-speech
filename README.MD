@@ -11,3 +11,11 @@ Mọi người dùng có ý thức nhé!
 <strong>Chân thành cảm ơn đội ngũ Zalo!</strong>
 
 Cafe for me: 0905677464 (MoMo) - Trần Cao Minh Bách
+
+<h1>Hướng dẫn sử dụng<h1>
+1. <strong>Cài đặt các gói cần thiết:</strong>
+pip install -r requirements.txt
+python3 -m nltk.downloader 'punkt'
+
+<br>2. <strong>Khởi chạy app</strong>
+python3 t2sUI.py
