@@ -10,12 +10,12 @@ Mọi người dùng có ý thức nhé!
 
 <strong>Chân thành cảm ơn đội ngũ Zalo!</strong>
 
-Cafe for me: 0905677464 (MoMo) - Trần Cao Minh Bách
+<h2>Cafe for me: 0905677464 (MoMo) - Trần Cao Minh Bách</h2>
 
-<h1>Hướng dẫn sử dụng<h1>
-1. <strong>Cài đặt các gói cần thiết:</strong>
+<h1>Hướng dẫn sử dụng</h1>
+1. <h2><strong>Cài đặt các gói cần thiết:</strong></h2>
 <br>pip install -r requirements.txt
 <br><br>python3 -m nltk.downloader 'punkt'
 
-<br>2. <strong>Khởi chạy app</strong>
+<br>2. <h2><strong>Khởi chạy app</strong></h2>
 python3 t2sUI.py
