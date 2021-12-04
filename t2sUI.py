@@ -1,7 +1,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QDialog, QMainWindow, QMessageBox)
-from zaloapi import final_path_mp3
+# from _zaloapi import final_path_mp3
 import sys
 import requests
 import os
