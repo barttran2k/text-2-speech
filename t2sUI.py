@@ -5,10 +5,12 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QMainWindow, QMessageBox)
 import sys
 import requests
 import os
+import random
 import re
 import time
 import nltk
 from urllib.parse import quote
+
 
 class text2voice:
 
@@ -128,9 +130,10 @@ class final_path_mp3():
 
         return path
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        
+
         MainWindow.setObjectName("T2SBT")
         MainWindow.resize(647, 412)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -165,7 +168,8 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked = lambda:self.do_it())
+        self.pushButton = QtWidgets.QPushButton(
+            self.centralwidget, clicked=lambda: self.do_it())
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(19)
@@ -204,24 +208,39 @@ class Ui_MainWindow(object):
         choice = self.comboBox.currentText()
         if choice == "Nữ - Miền Nam":
             voiceid = '1'
+            filename = "Nữ_Miền_Nam" + \
+                "_" + str(random.randint(1, 10000))
         elif choice == "Nam - Miền Nam":
             voiceid = '2'
+            filename = "Nam_Miền_Nam" + \
+                "_" + str(random.randint(1, 10000))
         elif choice == "Nữ - Miền Bắc":
             voiceid = '3'
+            filename = "Nữ_Miền_Bắc" + \
+                "_" + str(random.randint(1, 10000))
         elif choice == "Nam - Miền Bắc":
             voiceid = '4'
+            filename = "Nam_Miền_Bắc" + \
+                "_" + str(random.randint(1, 10000))
         else:
+            filename = id
             voiceid = '1'
-        path = final_path_mp3.get_path_mp3(id=id,payload=payload,voiceid=voiceid,speed="1.0")
+        filename = str(filename)
+        
+        path = final_path_mp3.get_path_mp3(
+            id=filename, payload=payload, voiceid=voiceid, speed="1.0")
         print(path)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Chọn..."))
         self.comboBox.setItemText(1, _translate("MainWindow", "Nữ - Miền Nam"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "Nam - Miền Nam"))
+        self.comboBox.setItemText(
+            2, _translate("MainWindow", "Nam - Miền Nam"))
         self.comboBox.setItemText(3, _translate("MainWindow", "Nữ - Miền Bắc"))
-        self.comboBox.setItemText(4, _translate("MainWindow", "Nam - Miền Bắc"))
+        self.comboBox.setItemText(
+            4, _translate("MainWindow", "Nam - Miền Bắc"))
         self.label.setText(_translate("MainWindow", "Giọng đọc:"))
         self.label_2.setText(_translate("MainWindow", "Văn bản:"))
         self.pushButton.setText(_translate("MainWindow", "Tạo giọng nói"))
@@ -229,7 +248,8 @@ class Ui_MainWindow(object):
         self.menuBart_Tran.setTitle(_translate("MainWindow", "Bart Tran"))
         self.actionOpen_2.setText(_translate("MainWindow", "Open..."))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
-        
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
