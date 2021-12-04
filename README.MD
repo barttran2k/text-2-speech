@@ -26,4 +26,5 @@ brew install ffmpeg (cài homebrew trước nhé!)
 python3 t2sUI.py
 
 <h2>UI Demo</h2>
-<img src=https://github.com/bachtran2000/text-2-speech/blob/main/ui.png>
+<img src=https://github.com/bachtran2000/text-2-speech/blob/main/img/UI%20for%20use.png><br>
+<br><img src=https://github.com/bachtran2000/text-2-speech/blob/main/img/output%20audio.png><br>
