@@ -24,3 +24,6 @@ Mac:<br>
 brew install ffmpeg (cài homebrew trước nhé!)
 <br><h2>3. <strong>Khởi chạy app</strong></h2>
 python3 t2sUI.py
+
+<h2>UI Demo</h2>
+<img src=https://github.com/bachtran2000/text-2-speech/blob/main/ui.png>
