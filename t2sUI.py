@@ -211,11 +211,11 @@ class Ui_MainWindow(object):
             filename = "Nữ_Miền_Nam" + \
                 "_" + str(random.randint(1, 10000))
         elif choice == "Nam - Miền Nam":
-            voiceid = '2'
+            voiceid = '3'
             filename = "Nam_Miền_Nam" + \
                 "_" + str(random.randint(1, 10000))
         elif choice == "Nữ - Miền Bắc":
-            voiceid = '3'
+            voiceid = '2'
             filename = "Nữ_Miền_Bắc" + \
                 "_" + str(random.randint(1, 10000))
         elif choice == "Nam - Miền Bắc":
