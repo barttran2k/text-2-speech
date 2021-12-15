@@ -41,7 +41,7 @@ class text2voice:
             proxy = random.choice(proxies)
             phttp = "http://" + proxy
             text = quote(str(p))
-            print(phttp)
+            
             # text.encode('utf-8')  # Totally fine.
             payload = "input="+text+"&speaker_id=" + \
                 voidid+"&speed="+speed+"&dict_id=0"
