@@ -10,17 +10,38 @@ import re
 import time
 import nltk
 from urllib.parse import quote
+from bs4 import BeautifulSoup
 
 
 class text2voice:
+    def get_free_proxies():
+        url = "https://free-proxy-list.net/"
+        # request and grab content
+        soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+        # to store proxies
+        proxies = []
+        for row in soup.find("table", attrs={"class": "table table-striped table-bordered"}).find_all("tr")[1:]:
+            tds = row.find_all("td")
+            try:
+                ip = tds[0].text.strip()
+                port = tds[1].text.strip()
+                proxies.append(str(ip) + ":" + str(port))
+            except IndexError:
+                continue
+        return proxies
 
     def zalo_api(payload, voidid, speed):
+        # get proxies
+        proxies = []
+        proxies = text2voice.get_free_proxies()
         url = "https://zalo.ai/api/demo/v1/tts/synthesize"
         f = open("output.txt", "w")
         links = []
         for p in payload:
+            proxy = random.choice(proxies)
+            phttp = "http://" + proxy
             text = quote(str(p))
-
+            print(phttp)
             # text.encode('utf-8')  # Totally fine.
             payload = "input="+text+"&speaker_id=" + \
                 voidid+"&speed="+speed+"&dict_id=0"
@@ -32,10 +53,10 @@ class text2voice:
                 "cookie": "zpsid=eMKnVbo-PZEvNHqtDTKIOgHQ7p4nrWzalI47O4wZJssuT3bRV_irVuyWFcWShorgrNnyH1sN7H_cHL08DySx4jayN3Kgv2SblZf95sovCHgQRaSg; zai_did=8k9uAj3FNiTevcSSryzXoYYo64d0o6V3AB4PHJ8q; zpsidleg=eMKnVbo-PZEvNHqtDTKIOgHQ7p4nrWzalI47O4wZJssuT3bRV_irVuyWFcWShorgrNnyH1sN7H_cHL08DySx4jayN3Kgv2SblZf95sovCHgQRaSg; zai_sid=lf2zTzCfGqIZbxznrofUGhhifo2eNnvBlxcP6va7P5c8xPue-bDyJDAnt0JxQqmvuOZmID4xQZJUyVnrp1Xs0xdtwLUAHM0ydQFdQl1IIGRigkzd; __zi=3000.SSZzejyD0jydXQcYsa00d3xBfxgP71AM8Tdbg8yB7SWftQxdY0aRp2gIh-QFHXF2BvMWxp0mDW.1; fpsend=149569; _zlang=vn"
             }
 
-            response = requests.request(
-                "POST", url, data=payload.encode('utf-8'), headers=headers)
+            response = requests.request("POST", url, data=payload.encode(
+                'utf-8'), headers=headers, proxies={'http': phttp})
             f.write(response.text+"\n")
-            time.sleep(5)
+            
 
         out = open('output.txt', 'r').read()
 
@@ -226,14 +247,15 @@ class Ui_MainWindow(object):
             filename = id
             voiceid = '1'
         filename = str(filename)
-        
+
         path = final_path_mp3.get_path_mp3(
             id=filename, payload=payload, voiceid=voiceid, speed="1.0")
         print(path)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Text to Speech Bart Tran"))
+        MainWindow.setWindowTitle(_translate(
+            "MainWindow", "Text to Speech Bart Tran"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Chọn..."))
         self.comboBox.setItemText(1, _translate("MainWindow", "Nữ - Miền Nam"))
         self.comboBox.setItemText(
