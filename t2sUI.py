@@ -37,20 +37,26 @@ class text2voice:
         url = "https://zalo.ai/api/demo/v1/tts/synthesize"
         f = open("output.txt", "w")
         links = []
+        source = "https://zalo.ai/"
+        cookie=''
         for p in payload:
+            session = requests.Session()
             proxy = random.choice(proxies)
             phttp = "http://" + proxy
             text = quote(str(p))
-            
+            response = session.get(source)
+            cookie = response.cookies.get_dict()
             # text.encode('utf-8')  # Totally fine.
             payload = "input="+text+"&speaker_id=" + \
                 voidid+"&speed="+speed+"&dict_id=0"
+            for k,v in cookie.items():
+                cookie = k+'='+v
             headers = {
                 "content-type": "application/x-www-form-urlencoded; charset=utf-8",
                 "origin": "https://zalo.ai",
                 "referer": "https://zalo.ai/experiments/text-to-audio-converter",
-
-                "cookie": "zpsid=eMKnVbo-PZEvNHqtDTKIOgHQ7p4nrWzalI47O4wZJssuT3bRV_irVuyWFcWShorgrNnyH1sN7H_cHL08DySx4jayN3Kgv2SblZf95sovCHgQRaSg; zai_did=8k9uAj3FNiTevcSSryzXoYYo64d0o6V3AB4PHJ8q; zpsidleg=eMKnVbo-PZEvNHqtDTKIOgHQ7p4nrWzalI47O4wZJssuT3bRV_irVuyWFcWShorgrNnyH1sN7H_cHL08DySx4jayN3Kgv2SblZf95sovCHgQRaSg; zai_sid=lf2zTzCfGqIZbxznrofUGhhifo2eNnvBlxcP6va7P5c8xPue-bDyJDAnt0JxQqmvuOZmID4xQZJUyVnrp1Xs0xdtwLUAHM0ydQFdQl1IIGRigkzd; __zi=3000.SSZzejyD0jydXQcYsa00d3xBfxgP71AM8Tdbg8yB7SWftQxdY0aRp2gIh-QFHXF2BvMWxp0mDW.1; fpsend=149569; _zlang=vn"
+                "cookie": cookie,
+                # "cookie": "zai_did=8k9uAj3FNiTevcSSryzXoYYo64l0pcN8AB0TI38m; _ga=GA1.2.306647033.1634021428; zpsid=eMKnVbo-PZEPI60H5S5lHez9Pn8VmNT7aq8hJ5MvGHg0MKn9KeKvKwbBILT8iZPpqrTVLYQd2NAsQqPYEU4IO_S3LdeO_WeqoJK4PHB3Q3V78sLa; zai_sid=deN0KVCzFc28XCTI-JqcOPIFYmopHH0yXvJi2RHvQ7MkXkaNhavdLTIQ_nR0MrXKiQRc8jyTGqNmplOw_W9R4ixuf2NqFpaHmEx59AqVQqYnvyqf; ozi=2000.SSZzejyD0jydXQcYsa00d3xBfxgO71AMSOUclD5I6v9tXQszqXuPbtN8fRZP7nUICJ8p.1; _zlang=vn; _gid=GA1.2.1396954612.1641556131; __zi=3000.SSZzejyD0jydXQcYsa00d3xBfxgP71AM8Tdbg8yDLybdsUFXomnGoctPgUVF3Ht2QDAewSe47yO.1; _gat_gtag_UA_158812682_2=1"
             }
 
             response = requests.request("POST", url, data=payload.encode(
